@@ -86,7 +86,12 @@ exports.config = {
         maxInstances: 5,
         //
         browserName: 'chrome',
-        acceptInsecureCerts: true
+        acceptInsecureCerts: true,
+
+        "selenoid:options":{
+            enableVNC: true,
+            enableVideo: true
+        }
         // If outputDir is provided WebdriverIO can capture driver session logs
         // it is possible to configure which logTypes to include/exclude.
         // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
@@ -124,8 +129,14 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'http://localhost',
+    baseUrl: 'http://test:test-password@localhost:4444/wd/hub',
     //
+
+    hostname: "localhost",
+    path: "/wd/hub",
+    port: 4444,
+    protocol: "http",
+    
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
     //
@@ -140,7 +151,15 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: ['chromedriver'],
+   /* services: ['docker'],
+    dockerOptions: {
+        //image: 'selenium/standalone-chrome',
+        healthCheck: 'http://test:test-password@localhost:4444/wd/hub',
+        options: {
+            p: ['4444:4444'],
+            shmSize: '2g'
+        }
+    },*/
     
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
